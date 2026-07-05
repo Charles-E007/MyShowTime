@@ -25,8 +25,14 @@ async function bootstrap() {
   app.setBaseViewsDir(join(process.cwd(), 'views'));
   app.setViewEngine('hbs');
 
-  // Enregistrement du helper HBS
+  // Enregistrement des helpers HBS
   hbs.registerHelper('eq', (a, b) => a === b);
+  
+  // 🚀 NOUVEAU HELPER : Compte le nombre d'éléments d'un type précis dans un tableau
+  hbs.registerHelper('countType', (events: any[], type: string) => {
+    if (!Array.isArray(events)) return 0;
+    return events.filter(event => event.type === type).length;
+  });
 
   // Gestion des Sessions persistantes via MongoDB Atlas
   app.use(

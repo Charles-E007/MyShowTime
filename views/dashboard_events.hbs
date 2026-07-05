@@ -109,7 +109,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span class="hidden sm:inline">John Doe</span>
+                  <span class="hidden sm:inline">{{user.name}}</span>
                   <svg
                     class="hi-mini hi-chevron-down hidden size-5 opacity-40 sm:inline-block"
                     xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +322,7 @@
           <a href="javascript:void(0)" class="flex flex-col rounded-lg border border-slate-200 bg-white hover:border-slate-300 active:border-violet-300">
             <div class="flex grow items-center justify-between p-5">
               <dl>
-                <dt class="text-2xl font-bold">{{usersCount}} <span class="font-semibold"></span> </dt>
+                <dt class="text-2xl font-bold">{{users.length}} <span class="font-semibold"></span> </dt>
                 <dd class="text-sm font-medium text-slate-500">
                   Total Users
                 </dd>
@@ -352,7 +352,7 @@
           <a href="javascript:void(0)" class="flex flex-col rounded-lg border border-slate-200 bg-white hover:border-slate-30 active:border-emerald-300">
             <div class="flex grow items-center justify-between p-5">
               <dl>
-                <dt class="text-2xl font-bold">{{eventsCount}}</dt>
+                <dt class="text-2xl font-bold">{{countType events 'event'}}</dt>
                 <dd class="text-sm font-medium text-slate-500">nombre Events</dd>
               </dl>
               <div
@@ -386,8 +386,8 @@
             class="flex flex-col rounded-lg border border-slate-200 bg-white hover:border-slate-300 active:border-rose-300">
             <div class="flex grow items-center justify-between p-5">
               <dl>
-                <dt class="text-2xl font-bold">4.720</dt>
-                <dd class="text-sm font-medium text-slate-500">Nombre de concert</dd>
+                <dt class="text-3xl font-bold text-slate-900">{{events.length}}</dt>
+<dd class="text-sm font-medium text-slate-500">Nombre de concerts</dd>
               </dl>
               <div
                 class="flex size-12 items-center justify-center rounded-xl border border-rose-100 bg-rose-50 text-rose-500"

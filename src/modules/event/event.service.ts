@@ -9,20 +9,30 @@ import { UsersService } from '../users/users.service';
 @Injectable()
 export class EventService {
   constructor(
-    @InjectModel(Event.name) private eventModel: Model<EventDocument>, private usersService: UsersService
+    @InjectModel(Event.name) private eventModel: Model<EventDocument>, 
+    private readonly usersService: UsersService, // Ajout de readonly pour les bonnes pratiques
   ) {}
 
   async create(dto: CreateEventDto): Promise<Event> {
+    // 🔍 LOG DE DÉBOGAGE : Pour voir exactement ce que le service reçoit du contrôleur
+    console.log("=== [DEBUG SERVICE] DTO reçu pour création ===");
+    console.log(dto);
+
     const event = new this.eventModel(dto);
 
-    const users = this.usersService.findAll();
+    // 🚀 OPTIMISATION : On attend la promesse ici proprement au lieu de le faire dans la boucle
+    const users = await this.usersService.findAll();
 
-    for (const user of await users){
-      for (const artist of event.artist) {
+    // Système de notification des favoris
+    for (const user of users) {
+      // Sécurité : on vérifie que l'utilisateur a bien un tableau de favoris
+      if (user.favoris && Array.isArray(user.favoris)) {
+        for (const artist of event.artist) {
           if (user.favoris.includes(artist)) {
-            user.message.push(`L'artiste ${artist} a un concert prévu pour le ${event.date_event} au ${event.lieu}`)
+            user.message.push(`L'artiste ${artist} a un concert prévu pour le ${event.date_event} au ${event.lieu}`);
             await this.usersService.update(user._id.toString(), user);
           }
+        }
       }
     }
 

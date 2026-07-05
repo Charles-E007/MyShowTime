@@ -7,6 +7,7 @@ import { EventModule } from './modules/event/event.module';
 import { ReservationModule } from './modules/reservation/reservation.module';
 import { AppController } from './app.controller';
 import { AdminModule } from './modules/admin/admin.module';
+import { CloudinaryService } from './common/cloudinary.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { AdminModule } from './modules/admin/admin.module';
     AdminModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [CloudinaryService],
 })
 export class AppModule {}

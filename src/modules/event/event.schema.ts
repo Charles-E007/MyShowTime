@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { IsOptional } from 'class-validator'; 
 
 export type EventDocument = Event & Document;
 
@@ -27,7 +28,8 @@ export class Event {
   price: number;
 
   @Prop()
-  imageUrl: string;
+  @IsOptional()
+  imageUrl?: string;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
