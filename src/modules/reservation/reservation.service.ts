@@ -41,7 +41,7 @@ export class ReservationService {
     await reservation.save();
 
     const qrcode = await QRCode.toDataURL(
-      `http://localhost:3000/reservations/${reservation._id}`,
+      `http://https://myshowtime-al1v.onrender.com//reservations/${reservation._id}`,
     );
     reservation.qrcode = qrcode;
     return reservation.save();
@@ -58,6 +58,6 @@ export class ReservationService {
 
   async delete(id: string): Promise<string> {
     await this.reservationModel.findByIdAndDelete(id).exec();
-    return 'Reservation deleted successfully';
+    return 'La reservation à été supprimé avec succès bro';
   }
 }
